@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 const Details = () => {
 
     const { data: details, isLoading } = useQuery(['details'], () =>
-        fetch(`http://localhost:5000/allDetails`).then(
+        fetch(`https://murmuring-reaches-34980.herokuapp.com/allDetails`).then(
             res => res.json()
         )
     )
 
     if (isLoading) {
-        return <p>Loading ....</p>;
+        return <p className='text-center py-8'>Loading ....</p>;
     }
 
     return (

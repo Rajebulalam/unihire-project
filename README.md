@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# Getting Started with Unihire
 
-Project Live Link [Unihire Project](https://github.com/facebook/create-react-app).
+Project Live Link [Unihire Project](https://unihire-b5b9c.web.app/).
 
-## Technology Used
+## Technologies Used
 
     * React
     * Tailwind

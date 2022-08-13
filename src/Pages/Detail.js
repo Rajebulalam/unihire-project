@@ -8,7 +8,7 @@ const Detail = () => {
     const navigate = useNavigate();
 
     const { data: details, isLoading } = useQuery(['details'], () =>
-        fetch(`http://localhost:5000/details/${id}`).then(
+        fetch(`https://murmuring-reaches-34980.herokuapp.com/details/${id}`).then(
             res => res.json()
         )
     )
@@ -20,7 +20,7 @@ const Detail = () => {
     }
 
     const handleDelete = id => {
-        const url = `http://localhost:5000/details/${id}`;
+        const url = `https://murmuring-reaches-34980.herokuapp.com/details/${id}`;
         fetch(url, {
             method: 'DELETE'
         })

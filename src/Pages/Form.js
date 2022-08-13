@@ -29,7 +29,7 @@ const Form = () => {
         console.log(update);
 
         // Send to the data base
-        fetch(`http://localhost:5000/detail/${id}`, {
+        fetch(`https://murmuring-reaches-34980.herokuapp.com/detail/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
