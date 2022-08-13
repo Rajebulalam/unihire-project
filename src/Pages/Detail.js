@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Detail = () => {
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const { data: details, isLoading } = useQuery(['details'], () =>
         fetch(`http://localhost:5000/details/${id}`).then(
@@ -18,6 +19,17 @@ const Detail = () => {
         return <p>Loading....</p>;
     }
 
+    const handleDelete = id => {
+        const url = `http://localhost:5000/details/${id}`;
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                navigate('/');
+            })
+    }
+
     return (
         <div className='w-full md:w-11/12 mx-auto px-4 md:px-6 py-8'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -26,7 +38,7 @@ const Detail = () => {
                         details.map(detail => <div key={detail._id}>
                             <h2 className='text-secondary text-xl'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Segment:</span> {detail.Segment} </h2>
                             <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Country:</span> {detail.Country} </p>
-                            <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Country:</span> {detail.Product} </p>
+                            <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Product:</span> {detail.Product} </p>
                             <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Discount Band:</span> {detail.DiscountBand} </p>
                             <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Units Sold:</span> {detail.UnitsSold} </p>
                             <p className='text-secondary text-xl pt-1'> <span style={{ fontFamily: 'Merienda' }} className='text-white'>Manufacturing Price:</span> {detail.ManufacturingPrice} </p>
@@ -45,8 +57,12 @@ const Detail = () => {
                     }
                 </div>
                 <div className='bg-primary p-6 rounded-sm flex items-center justify-center'>
-                    <button type="submit" className='btn btn-secondary mr-4'>Edit</button>
-                    <button type="submit" className='btn btn-secondary'>Delete</button>
+                    {
+                        details?.map(detail => <div key={detail._id}>
+                            <button type="submit" className='btn btn-secondary mr-4'><Link to={`form/${detail._id}`}>Edit</Link></button>
+                            <button type="submit" className='btn btn-secondary' onClick={() => handleDelete(detail._id)}> Delete </button>
+                        </div>)
+                    }
                 </div>
             </div>
         </div>

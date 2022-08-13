@@ -2,6 +2,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Detail from './Pages/Detail';
 import Details from './Pages/Details';
+import Form from './Pages/Form';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Details></Details>}></Route>
         <Route path='inventory/:id' element={<Detail></Detail>}></Route>
+        <Route path='inventory/:id/form/:id' element={<Form></Form>}></Route>
       </Routes>
     </div>
   );
